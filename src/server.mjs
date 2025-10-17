@@ -2,28 +2,36 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
-
 import apiRouter from './routes/index.mjs';
 import { notFound, errorHandler } from './middleware/errorHandler.mjs';
 
 const app = express();
 
+// Env
 const PORT = Number(process.env.PORT) || 5000;
 const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN || 'http://localhost:5173';
 const MONGO_URI = process.env.MONGO_URI;
 
+// Boot logs
 console.log('🟡 Booting GymGenie backend...');
 console.log('• PORT:', PORT);
 console.log('• CLIENT_ORIGIN:', CLIENT_ORIGIN);
 console.log('• MONGO_URI present?', Boolean(MONGO_URI));
 
+// Middleware
 app.use(cors({ origin: CLIENT_ORIGIN, credentials: true }));
 app.use(express.json());
 
+// Quick health check
+app.get('/health', (_req, res) => res.status(200).json({ ok: true }));
+
+// Routes
 app.use('/api', apiRouter);
 
+// 404 + Error Handler
 app.use(notFound);
 app.use(errorHandler);
+
 
 async function start() {
     if (!MONGO_URI) {

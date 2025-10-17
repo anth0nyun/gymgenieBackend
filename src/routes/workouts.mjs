@@ -5,7 +5,7 @@ import {
     createWorkout,
     updateWorkout,
     deleteWorkout,
-} from "../controllers/workout.controller.mjs";
+} from "../controllers/workoutController.mjs";
 
 const router = Router();
 

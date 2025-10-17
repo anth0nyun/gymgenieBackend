@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import Workout from "../models/workout.model.mjs";
+import Workout from "../models/Workout.mjs";
 
 const toInt = (v, fb) => {
     const n = Number.parseInt(v, 10);
@@ -9,6 +9,7 @@ const toInt = (v, fb) => {
 export const listWorkouts = async (req, res, next) => {
     try {
         const { page = "1", limit = "10", type, tag, q, sort = "name" } = req.query;
+
         const filter = {};
         if (type) filter.type = type;
         if (tag) filter.tags = tag;
