@@ -1,8 +1,18 @@
-import { Router } from 'express';
+import { Router } from "express";
+import {
+    listWorkouts,
+    getWorkout,
+    createWorkout,
+    updateWorkout,
+    deleteWorkout,
+} from "../controllers/workout.controller.mjs";
+
 const router = Router();
 
-router.get('/', (_req, res) => {
-    res.json({ message: 'Workouts endpoint ready' });
-});
+router.get("/", listWorkouts);
+router.get("/:id", getWorkout);
+router.post("/", createWorkout);
+router.patch("/:id", updateWorkout);
+router.delete("/:id", deleteWorkout);
 
 export default router;
