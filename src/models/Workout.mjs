@@ -14,11 +14,7 @@ const exerciseSchema = new mongoose.Schema(
 const workoutSchema = new mongoose.Schema(
     {
         name: { type: String, required: true, trim: true },
-        type: {
-            type: String,
-            enum: ['strength', 'cardio', 'other'],
-            default: 'strength'
-        },
+        type: { type: String, enum: ["strength", "cardio", "custom"], default: "strength", index: true },
         notes: { type: String, trim: true },
         exercises: { type: [exerciseSchema], default: [] }
     },

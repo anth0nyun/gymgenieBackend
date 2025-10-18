@@ -1,18 +1,25 @@
-import { Router } from "express";
+import { Router } from 'express';
 import {
     listWorkouts,
     getWorkout,
     createWorkout,
     updateWorkout,
     deleteWorkout,
-} from "../controllers/workoutController.mjs";
+    getWorkoutTags,
+    getWorkoutMeta,
+} from '../controllers/workoutController.mjs';
 
 const router = Router();
 
-router.get("/", listWorkouts);
-router.get("/:id", getWorkout);
-router.post("/", createWorkout);
-router.patch("/:id", updateWorkout);
-router.delete("/:id", deleteWorkout);
+// helpers
+router.get('/tags', getWorkoutTags);
+router.get('/meta', getWorkoutMeta);
+
+// CRUD
+router.get('/', listWorkouts);
+router.get('/:id', getWorkout);
+router.post('/', createWorkout);
+router.patch('/:id', updateWorkout);
+router.delete('/:id', deleteWorkout);
 
 export default router;
