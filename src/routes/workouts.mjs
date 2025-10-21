@@ -5,14 +5,12 @@ import {
     createWorkout,
     updateWorkout,
     deleteWorkout,
-    getWorkoutTags,
     getWorkoutMeta,
 } from '../controllers/workoutController.mjs';
 
 const router = Router();
 
 // helpers
-router.get('/tags', getWorkoutTags);
 router.get('/meta', getWorkoutMeta);
 
 // CRUD

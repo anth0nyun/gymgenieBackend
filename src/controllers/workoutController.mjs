@@ -7,10 +7,8 @@ const toInt = (v, fb) => {
     return Number.isFinite(n) ? n : fb;
 };
 
-// allow only known fields to sort by (security/sanity)
 const SORT_WHITELIST = new Set(["name", "-name", "createdAt", "-createdAt", "updatedAt", "-updatedAt"]);
 
-// Build a Mongo filter from query params
 
 function buildFilter({ type, tag, q }) {
     const filter = {};
@@ -139,16 +137,6 @@ export const deleteWorkout = async (req, res, next) => {
         if (!doc) return res.status(404).json({ msg: "Workout not found" });
 
         res.status(200).json({ msg: "Workout deleted", id: doc._id });
-    } catch (err) {
-        next(err);
-    }
-};
-
-// NGET /api/workouts/tags — tag list 
-export const getWorkoutTags = async (_req, res, next) => {
-    try {
-        const tags = await Workout.distinct("tags");
-        res.status(200).json({ tags: tags.filter(Boolean).sort((a, b) => a.localeCompare(b)) });
     } catch (err) {
         next(err);
     }
